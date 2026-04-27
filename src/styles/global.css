@@ -1,0 +1,184 @@
+:root {
+  --header-height: 60px; /* FIX global */
+}
+
+/* ===============================
+   LAYOUT BASE
+================================ */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: var(--header-height); /* FIX */
+  margin: 0;
+  background: #f4f7fa;
+}
+
+/* ===============================
+   MAIN (CENTRADO REAL)
+================================ */
+main {
+  flex: 1;
+  width: 100%;
+
+  display: flex;              /* FIX */
+  flex-direction: column;
+  align-items: center;        /* FIX */
+}
+
+/* ===============================
+   HERO
+================================ */
+.hero-benefits {
+  width: 100%;
+  max-width: 700px;
+  text-align: center;
+  margin: 20px auto 10px;
+  padding: 0 20px;
+}
+
+/* ===============================
+   BOTONES (TABS)
+================================ */
+.benefits {
+  position: sticky;
+  top: var(--header-height);
+  z-index: 999;
+
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+
+  background: #f4f7fa;
+  padding: 10px 20px;
+
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.benefits::-webkit-scrollbar {
+  display: none;
+}
+
+.benefit {
+  flex: 0 0 auto;
+  padding: 10px 16px;
+  border-radius: 999px;
+
+  border: 1px solid #ddd;
+  background: #f9fafb;
+
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.benefit:hover {
+  border-color: #0070f3;
+  color: #0070f3;
+}
+
+.benefit.active {
+  background: #0070f3;
+  color: white;
+  border-color: #0070f3;
+}
+
+/* ===============================
+   FORM SECTIONS (UNIFICADO)
+================================ */
+.form-section {
+  display: none;
+  width: 100%;
+  max-width: 700px; /* FIX clave */
+}
+
+#regresar {
+  display: block;
+}
+
+/* ===============================
+   APP (FORM CENTRADO)
+================================ */
+.app-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* ===============================
+   CARD
+================================ */
+.container {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 400px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* ===============================
+   INPUTS
+================================ */
+select, input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* ===============================
+   SUBMIT
+================================ */
+button[type="submit"] {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* ===============================
+   HEADER (FIX REAL)
+================================ */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  height: var(--header-height);   /* 🔥 FIX */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  padding: 0 20px;
+  background: white;              /* 🔥 FIX */
+  border-bottom: 1px solid #eee;
+
+  z-index: 1000;
+}
+
+/* idioma */
+.lang-top button {
+  padding: 10px 16px;
+  border: none;
+  background: #111;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* ===============================
+   FOOTER
+================================ */
+.footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  color: #666;
+}

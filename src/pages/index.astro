@@ -1,186 +1,102 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import HeroBenefits from "../components/HeroBenefits.astro";
-import TopTabs from "../components/TopTabs.astro";
-let lang = "en";
+import Layout from '../layouts/Layout.astro';
+import HeroBenefits from '../components/HeroBenefits.astro';
+import TopTabs from '../components/TopTabs.astro';
+const djangoBaseUrl = 'http://127.0.0.1:8000';
 ---
 
-<Layout>
-
-<!-- HEADER -->
+<Layout title="Quiavic | Regresa a México mejor preparado">
   <div class="top-bar">
-    <div class="brand">QUIAVIC</div>
-
     <div class="lang-top">
-      <button id="langBtn" onclick="toggleLang()">Español</button>
+      <button type="button" id="langBtn" aria-label="Cambiar idioma">Español</button>
     </div>
   </div>
 
-  <!-- HEADER -->
-  <div class="top-bar">
-    <div class="lang-top">
-      <button type="button" id="langBtn" onclick="toggleLang()">
-        Español
-      </button>
-    </div>
-  </div>
+  <main>
+    <HeroBenefits />
+    <TopTabs />
 
-  <!-- HERO -->
-  <HeroBenefits />
-
-  <!-- BOTONES -->
-  <TopTabs />
-
-  <!-- ===============================
-       FORMULARIOS
-  =============================== -->
-
-  <!-- REGRESAR (default visible) -->
-  <div class="form-section" id="regresar">
-    <div class="app-container">
-      <div class="container">
-
-        <h1 id="title">QUIAVIC</h1>
-        <h2 id="subtitle">Do you want to return to Mexico? Plan your return</h2>
-
-        <form>
-          <label id="q1">What do you do?</label>
-          <select id="workType">
-            <option id="opt-employee">Employee</option>
-            <option id="opt-contractor">Contractor</option>
-            <option id="opt-other-work">Other</option>
-          </select>
-
-          <label id="q2">What is your profession?</label>
-          <select id="profession">
-            <option id="opt-construction">Construction</option>
-            <option id="opt-teacher">Teacher</option>
-            <option id="opt-engineer">Engineer</option>
-            <option id="opt-other-prof">Other</option>
-          </select>
-
-          <label id="q3">Which state in Mexico do you want to return to?</label>
-          <input id="stateInput" type="text" placeholder="Example: Nuevo León, Jalisco..." />
-
-          <button type="submit" id="submitBtn">Plan my return</button>
+    <section class="form-section active" data-form="regresar">
+      <div class="app-container">
+        <form class="container" data-endpoint="/api/quiero-regresar/">
+          <h2>Quiero regresar</h2>
+          <input required name="estado_actual" placeholder="¿En qué estado vives hoy?" />
+          <input required name="fecha_regreso" placeholder="¿En cuántos días planeas regresar?" />
+          <input required name="nivel_academico" placeholder="¿Cuál es tu nivel académico?" />
+          <input required name="estado_mexico" placeholder="¿A qué estado de México quieres regresar?" />
+          <button type="submit">Enviar</button>
+          <p class="feedback"></p>
         </form>
-
       </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- OPORTUNIDADES (FIX: contenido visible) -->
-  <div class="form-section" id="oportunidades">
-    <div class="app-container">
-      <div class="container">
-        <h2>Oportunidades en México</h2>
-        <p>Contenido en construcción...</p>
+    <section class="form-section" data-form="oportunidades">
+      <div class="app-container">
+        <form class="container" data-endpoint="/api/oportunidades-mexico/">
+          <h2>Oportunidades en México</h2>
+          <input required name="nombre" placeholder="Nombre" />
+          <input required name="email" type="email" placeholder="Correo electrónico" />
+          <input required name="sector" placeholder="Sector de interés" />
+          <textarea required name="mensaje" rows="4" placeholder="¿Qué oportunidades buscas?"></textarea>
+          <button type="submit">Enviar</button>
+          <p class="feedback"></p>
+        </form>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- ASESORIA -->
-  <div class="form-section" id="asesoria">
-    <div class="app-container">
-      <div class="container">
-        <h2>Asesoría</h2>
-        <p>Contenido en construcción...</p>
+    <section class="form-section" data-form="asesoria">
+      <div class="app-container">
+        <form class="container" data-endpoint="/api/asesoria/">
+          <h2>Asesoría</h2>
+          <input required name="nombre" placeholder="Nombre" />
+          <input required name="email" type="email" placeholder="Correo electrónico" />
+          <input required name="tema" placeholder="Tema" />
+          <textarea required name="mensaje" rows="4" placeholder="Cuéntanos tu caso"></textarea>
+          <button type="submit">Enviar</button>
+          <p class="feedback"></p>
+        </form>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- CRECIMIENTO -->
-  <div class="form-section" id="crecimiento">
-    <div class="app-container">
-      <div class="container">
-        <h2>Crecimiento personal</h2>
-        <p>Contenido en construcción...</p>
+    <section class="form-section" data-form="crecimiento">
+      <div class="app-container">
+        <form class="container" data-endpoint="/api/crecimiento-personal/">
+          <h2>Crecimiento personal</h2>
+          <input required name="nombre" placeholder="Nombre" />
+          <input required name="email" type="email" placeholder="Correo electrónico" />
+          <input required name="objetivo" placeholder="Objetivo" />
+          <textarea required name="mensaje" rows="4" placeholder="¿En qué quieres crecer?"></textarea>
+          <button type="submit">Enviar</button>
+          <p class="feedback"></p>
+        </form>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
-  <!-- ===============================
-       LANGUAGE SCRIPT
-  =============================== -->
-  <script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
+  <script define:vars={{ djangoBaseUrl }}>
+    const tabs = document.querySelectorAll('.benefit');
+    const sections = document.querySelectorAll('.form-section');
+    tabs.forEach((tab) => tab.addEventListener('click', () => {
+      tabs.forEach((t) => t.classList.remove('active'));
+      tab.classList.add('active');
+      sections.forEach((s) => s.classList.toggle('active', s.dataset.form === tab.dataset.target));
+    }));
 
-    let currentLang = "en";
-
-    function setLang(lang) {
-      const subtitle = document.getElementById("subtitle");
-      const q1 = document.getElementById("q1");
-      const q2 = document.getElementById("q2");
-      const q3 = document.getElementById("q3");
-      const btn = document.getElementById("submitBtn");
-      const stateInput = document.getElementById("stateInput");
-
-      const optEmployee = document.getElementById("opt-employee");
-      const optContractor = document.getElementById("opt-contractor");
-      const optOtherWork = document.getElementById("opt-other-work");
-
-      const optConstruction = document.getElementById("opt-construction");
-      const optTeacher = document.getElementById("opt-teacher");
-      const optEngineer = document.getElementById("opt-engineer");
-      const optOtherProf = document.getElementById("opt-other-prof");
-
-      if (!subtitle) return;
-
-      if (lang === "es") {
-        subtitle.innerText = "¿Quieres regresar a México? Planea tu regreso";
-        q1.innerText = "¿A qué te dedicas?";
-        q2.innerText = "¿Qué trabajo desempeñas?";
-        q3.innerText = "¿A qué estado de México quieres regresar?";
-        btn.innerText = "Planear mi regreso";
-
-        stateInput.placeholder = "Ejemplo: Nuevo León, Jalisco...";
-
-        optEmployee.innerText = "Empleado";
-        optContractor.innerText = "Contratista";
-        optOtherWork.innerText = "Otro";
-
-        optConstruction.innerText = "Construcción";
-        optTeacher.innerText = "Maestro";
-        optEngineer.innerText = "Ingeniero";
-        optOtherProf.innerText = "Otro";
-
-      } else {
-        subtitle.innerText = "Do you want to return to Mexico? Plan your return";
-        q1.innerText = "What do you do?";
-        q2.innerText = "What is your profession?";
-        q3.innerText = "Which state in Mexico do you want to return to?";
-        btn.innerText = "Plan my return";
-
-        stateInput.placeholder = "Example: Nuevo León, Jalisco...";
-
-        optEmployee.innerText = "Employee";
-        optContractor.innerText = "Contractor";
-        optOtherWork.innerText = "Other";
-
-        optConstruction.innerText = "Construction";
-        optTeacher.innerText = "Teacher";
-        optEngineer.innerText = "Engineer";
-        optOtherProf.innerText = "Other";
+    document.querySelectorAll('.container').forEach((form) => form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const feedback = form.querySelector('.feedback');
+      feedback.textContent = 'Enviando...';
+      try {
+        const payload = Object.fromEntries(new FormData(form).entries());
+        const response = await fetch(`${djangoBaseUrl}${form.dataset.endpoint}`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+        });
+        if (!response.ok) throw new Error();
+        feedback.textContent = 'Solicitud enviada correctamente.';
+        form.reset();
+      } catch {
+        feedback.textContent = 'No se pudo enviar. Revisa Django/CORS/CSRF.';
       }
-    }
-
-    function toggleLang() {
-      const btn = document.getElementById("langBtn");
-
-      if (currentLang === "en") {
-        setLang("es");
-        currentLang = "es";
-        btn.innerText = "English";
-      } else {
-        setLang("en");
-        currentLang = "en";
-        btn.innerText = "Español";
-      }
-    }
-
-    window.toggleLang = toggleLang;
-
-  });
+    }));
   </script>
-
 </Layout>

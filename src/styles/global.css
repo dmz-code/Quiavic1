@@ -1,29 +1,74 @@
-:root {
-  --header-height: 60px; /* FIX global */
+:root{
+  --header-height:60px;
+
+  --bg:#fafafa;
+  --card:#ffffff;
+
+  --text:#111827;
+  --text-light:#6b7280;
+
+  --border:#e5e7eb;
+
+  --primary:#2563eb;
+
+  --radius:16px;
+
+  --shadow:0 4px 18px rgba(0,0,0,.05);
 }
+
+.dark{
+  --bg:#0f172a;
+
+  --card:#1e293b;
+
+  --text:#f8fafc;
+
+  --text-light:#cbd5e1;
+
+  --border:#334155;
+
+  --primary:#60a5fa;
+
+  --shadow:none;
+}
+ 
+
 
 /* ===============================
    LAYOUT BASE
 ================================ */
 body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  padding-top: var(--header-height); /* FIX */
-  margin: 0;
-  background: #f4f7fa;
+
+
+  display:flex;
+
+  flex-direction:column;
+
+  margin:0;
+
+  height:100vh;
+
+  font-family:Arial,sans-serif;
+
+  background:var(--bg);
+
+  color:var(--text);
+
+  transition:.3s;
+
 }
 
 /* ===============================
-   MAIN (CENTRADO REAL)
+   MAIN CONTAINER(CENTRADO REAL)
 ================================ */
 main {
   flex: 1;
   width: 100%;
 
+  overflow: none;
   display: flex;              /* FIX */
   flex-direction: column;
-  align-items: center;        /* FIX */
+  margin-top: var(--header-height);
 }
 
 /* ===============================
@@ -34,68 +79,215 @@ main {
   max-width: 700px;
   text-align: center;
   margin: 20px auto 10px;
-  padding: 0 20px;
+  padding: 30px 20px;
 }
+
+/* ===============================
+   HERO sectionflag
+================================ */
+.hero-benefits {
+  position: relative; 
+  overflow: hidden;
+  width: 100%;
+  max-width: 1500px;
+  text-align: center;
+  margin: 20px auto 10px;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+/* bandera detrás del texto */
+.hero-benefits::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background-image: url('/src/assets/flags/usamex.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  opacity: 0.5; /* 🔥 super transparente */
+  z-index: 0;
+}
+
+/* hero tittle */
+.hero-title{
+
+  font-size:clamp(2rem,4vw,3.8rem);
+
+  color:var(--text);
+
+  font-weight:700;
+
+  letter-spacing:-1px;
+
+  text-shadow:none;
+
+}
+
+.hero-subtitle{
+
+  color:var(--text-light);
+
+  font-size:1.4rem;
+
+  text-shadow:none;
+
+}
+
+/* palabra destacada */
+.hero-title span {
+  color: #0070f3;
+
+  text-shadow:
+    0 4px 14px rgba(0,112,243,0.25);
+
+}
+
+/* ===============================
+   HERO SUBTITLE
+================================ */
+.hero-subtitle {
+  position: relative;
+  z-index: 1;
+
+  font-size: 1.9rem;
+
+  font-weight: 500;
+
+  line-height: 1.7;
+
+  color: #374151;
+
+  max-width: 620px;
+
+  margin: 0 auto;
+
+  text-shadow:
+    0 1px 6px rgba(255,255,255,0.6);
+}
+
 
 /* ===============================
    BOTONES (TABS)
 ================================ */
-.benefits {
-  position: sticky;
-  top: var(--header-height);
-  z-index: 999;
 
-  display: flex;
-  gap: 10px;
-  justify-content: center;
+.benefits{
 
-  background: #f4f7fa;
-  padding: 10px 20px;
+  display:flex;
 
-  overflow-x: auto;
-  white-space: nowrap;
+  justify-content:center;
+
+  gap:8px;
+
+  overflow-x:auto;
+
+  padding:8px;
+
 }
 
-.benefits::-webkit-scrollbar {
-  display: none;
+.benefits::-webkit-scrollbar{
+
+  display:none;
+
 }
 
-.benefit {
-  flex: 0 0 auto;
-  padding: 10px 16px;
-  border-radius: 999px;
+.benefit{
 
-  border: 1px solid #ddd;
-  background: #f9fafb;
+  border:none;
 
-  font-size: 14px;
-  cursor: pointer;
-  transition: 0.2s;
+  background:transparent;
+
+  color:var(--text-light);
+
+  padding:12px 18px;
+
+  border-radius:14px;
+
+  cursor:pointer;
+
+  transition:.25s;
+
+  font-size:15px;
+
 }
 
-.benefit:hover {
-  border-color: #0070f3;
-  color: #0070f3;
+.benefit:hover{
+
+  background:#f3f4f6;
+
+  color:var(--text);
+
 }
 
-.benefit.active {
-  background: #0070f3;
-  color: white;
-  border-color: #0070f3;
+.benefit.active{
+
+  background:#eef4ff;
+
+  color:var(--primary);
+
+  font-weight:600;
+
 }
+
 
 /* ===============================
-   FORM SECTIONS (UNIFICADO)
+   button DONATE
+================================ */
+
+
+/* ===============================
+   FORM SECTIONS central
 ================================ */
 .form-section {
   display: none;
   width: 100%;
-  max-width: 700px; /* FIX clave */
+  
+  
+
+  flex: 1;
+   min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.donate-btn{
+
+  padding:10px 22px;
+
+  border:none;
+
+  border-radius:999px;
+
+  background:#22c55e;
+
+  color:white;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.25s;
+
+  box-shadow:none;
+
 }
 
-#regresar {
-  display: block;
+.donate-btn:hover{
+
+  transform:translateY(-1px);
+
 }
+  .form-section.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;     /* 🔥 clave para no romper scroll */
+ 
+  height: 100%;
+}
+
+
 
 /* ===============================
    APP (FORM CENTRADO)
@@ -106,77 +298,197 @@ main {
   justify-content: center;
 }
 
-/* ===============================
-   CARD
+/* ===========================
+   CARD formularios
 ================================ */
-.container {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  width: 400px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+.container{
+
+  width:420px;
+
+  background:var(--card);
+
+  border:1px solid var(--border);
+
+  border-radius:20px;
+
+  padding:35px;
+
+  box-shadow:var(--shadow);
+
 }
 
 /* ===============================
-   INPUTS
+   INPUTS campos
 ================================ */
-select, input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 8px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+select,
+input{
+
+  width:100%;
+
+  padding:14px;
+
+  margin-top:10px;
+
+  border-radius:12px;
+
+  border:1px solid var(--border);
+
+  background:#fafafa;
+
+  transition:.25s;
+
+  box-sizing:border-box;
+
+}
+
+select:focus,
+input:focus{
+
+  outline:none;
+
+  background:white;
+
+  border-color:var(--primary);
+
+  box-shadow:0 0 0 3px rgba(37,99,235,.15);
+
 }
 
 /* ===============================
-   SUBMIT
+   SUBMIT button
 ================================ */
-button[type="submit"] {
-  margin-top: 20px;
-  width: 100%;
-  padding: 12px;
-  background: #0070f3;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+button[type="submit"]{
+
+  width:100%;
+
+  margin-top:25px;
+
+  padding:14px;
+
+  border:none;
+
+  border-radius:12px;
+
+  background:#111827;
+
+  color:white;
+
+  cursor:pointer;
+
+  transition:.25s;
+
+  font-size:15px;
+
+}
+
+button[type="submit"]:hover{
+
+  background:#1f2937;
+
 }
 
 /* ===============================
-   HEADER (FIX REAL)
+   HEADER topbar
 ================================ */
-.top-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+.top-bar{
 
-  height: var(--header-height);   /* 🔥 FIX */
+  position:fixed;
+
+  top:0;
+
+  left:0;
+
+  width:100%;
+
+  height:var(--header-height);
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:0 25px;
+
+  box-sizing:border-box;
+
+  .top-bar{background:var(--card);}
+
+  backdrop-filter:blur(14px);
+
+  border-bottom:1px solid var(--border);
+
+  z-index:1000;
+
+}
+
+/* ===============================
+   LOGO
+================================ */
+.logo {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-
-  padding: 0 20px;
-  background: white;              /* 🔥 FIX */
-  border-bottom: 1px solid #eee;
-
-  z-index: 1000;
 }
 
-/* idioma */
-.lang-top button {
-  padding: 10px 16px;
-  border: none;
-  background: #111;
-  color: white;
-  border-radius: 8px;
-  cursor: pointer;
+.logo img {
+  height: 80px;
+  width: auto;
+}
+
+/*button idioma */
+.lang-top button{
+
+  border:none;
+
+  background:#111827;
+
+  color:white;
+
+  padding:10px 20px;
+
+  border-radius:999px;
+
+  cursor:pointer;
+
+}
+
+/* ===============================
+   dark mode button
+================================ */
+.theme-btn{
+
+  width:42px;
+
+  height:42px;
+
+  border:none;
+
+  border-radius:12px;
+
+  background:transparent;
+
+  cursor:pointer;
+
+  font-size:20px;
+
+  transition:.25s;
+
+}
+
+.theme-btn:hover{
+
+  background:#f3f4f6;
+
 }
 
 /* ===============================
    FOOTER
 ================================ */
 .footer {
+  position: fixed;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
   text-align: center;
   padding: 20px;
   font-size: 14px;

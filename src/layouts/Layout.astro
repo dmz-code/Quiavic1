@@ -1,5 +1,5 @@
 ---
-import "../styles/global.css"; /* 🔥 FIX: carga CSS */
+import "../styles/global.css";
 ---
 
 <html lang="en">
@@ -10,15 +10,19 @@ import "../styles/global.css"; /* 🔥 FIX: carga CSS */
 
   <body>
 
-    <!-- CONTENIDO -->
-    <main>
-      <slot />
-    </main>
+    <!-- CONTENEDOR APP -->
+    <div class="app">
 
-    <!-- FOOTER -->
-    <footer class="footer">
-      © 2026 QUIAVIC
-    </footer>
+      <!-- MAIN -->
+      <main>
+        <slot />
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        © 2026 QUIAVIC
+      </footer>
+    </div>
 
   </body>
 </html>

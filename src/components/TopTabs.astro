@@ -1,11 +1,11 @@
 <div class="benefits" id="topTabs">
 
   <button class="benefit active" data-target="regresar">
-    Quiero regresar
+    Quiero regresar a Mexico
   </button>
 
   <button class="benefit" data-target="oportunidades">
-    Oportunidades en México
+    Oportunidades en Texas
   </button>
 
   <button class="benefit" data-target="asesoria">
@@ -13,34 +13,13 @@
   </button>
 
   <button class="benefit" data-target="crecimiento">
-    Crecimiento personal
+    About US
   </button>
 
+  <button class="benefit" data-target="Test">
+    Examen de práctica GED
+  </button>
+
+
+
 </div>
-
-<script is:inline>
-document.addEventListener("DOMContentLoaded", () => {
-
-  const buttons = document.querySelectorAll("#topTabs .benefit");
-  const sections = document.querySelectorAll(".form-section");
-
-  buttons.forEach(btn => {
-    btn.addEventListener("click", () => {
-
-      const target = btn.dataset.target;
-
-      // activar estilo
-      buttons.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-
-      // cambiar formulario
-      sections.forEach(sec => sec.style.display = "none");
-
-      const active = document.getElementById(target);
-      if (active) active.style.display = "block";
-
-    });
-  });
-
-});
-</script>

@@ -1,0 +1,53 @@
+---
+import Map from '../map/Map.astro';
+---
+ 
+ <section class="form-section" data-form="asesoria">
+
+    <div class="asesoria-layout">
+
+    <div class="app-container">
+      <form class="container" data-endpoint="/api/asesoria/">
+        <h2>Asesoría</h2>
+
+        <input required name="nombre" placeholder="Nombre" />
+        <input required name="email" type="email" placeholder="Email" />
+        <input required name="tema" placeholder="Tema" />
+        <textarea required name="mensaje" rows="4" placeholder="Cuéntanos tu caso"></textarea>
+
+        <button type="submit">Enviar</button>
+        <p class="feedback"></p>
+      </form>
+    </div>
+
+    <Map />
+
+     </div>
+
+  </section>
+
+
+
+<style>
+.asesoria-layout {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+   max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .asesoria-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.asesoria-layout .app-container {
+  width: auto;
+  flex: 0 0 auto;
+}
+</style>
